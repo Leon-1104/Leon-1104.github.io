@@ -170,6 +170,157 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/22/%E6%9D%83%E7%9B%8A%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/02/22/%E6%9D%83%E7%9B%8A%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-02-22 15:16:17 / Modified: 15:16:11" itemprop="dateCreated datePublished" datetime="2023-02-22T15:16:17+08:00">2023-02-22</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <hr>
+<p>title:权益部署流程<br>date:2023-2-22 15:14<br>tags:开发学习笔记</p>
+<hr>
+<h3 id="权益部署文档"><a href="#权益部署文档" class="headerlink" title="权益部署文档"></a>权益部署文档</h3><ol>
+<li><p>除api后缀包、common、domain包外，其他包的配置文件将端口更改为8095</p>
+</li>
+<li><p>在laiketui-app执行clean和 package</p>
+</li>
+<li><p>将打包好的文件上传至服务器</p>
+<ul>
+<li>ip：****</li>
+<li>usr：***</li>
+<li>pwd:****</li>
+</ul>
+</li>
+<li><p>上传成功后执行以下流程</p>
+</li>
+<li><p>进入到tomcat9目录</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/tomcat9/webapps/</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查询tomcat的pid</span> </span><br><span class="line">ps -ef|grep tomcat </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">杀死tomcat进程</span></span><br><span class="line">kill -9 进程id</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">执行全局通配符功能</span></span><br><span class="line">shopt -s extglob</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">删除ROOT以外的所有服务</span></span><br><span class="line">rm -rf !(ROOT)</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">将上传的war包复制到当前文件夹并且删除</span></span><br><span class="line">cp -rf /home/gly/*.war ./</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">进入到localhost文件夹 此文件夹下为缓存，每次部署时需要清空</span></span><br><span class="line">cd /tomcat9/work/Catalina/localhost</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">删除缓存文件</span></span><br><span class="line">rm -rf *</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">返回</span></span><br><span class="line">cd ../../../</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">进入到bin启动tomcat 执行startup.sh</span></span><br><span class="line">cd bin </span><br><span class="line">./startup.sh</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看运行日志</span></span><br><span class="line">cd ../logs/</span><br><span class="line">tail -f catalina.out</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">前端部署</span> </span><br><span class="line">cd /usr/local/nginx</span><br><span class="line">rm -rf dist</span><br><span class="line">cp -rf /home/gly/dist ./</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/22/windows%E6%9D%80%E8%BF%9B%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/02/22/windows%E6%9D%80%E8%BF%9B%E7%A8%8B/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-02-22 15:12:27" itemprop="dateCreated datePublished" datetime="2023-02-22T15:12:27+08:00">2023-02-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-08-29 17:19:31" itemprop="dateModified" datetime="2022-08-29T17:19:31+08:00">2022-08-29</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2.<br>查看端口占用：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -aon | findstr &quot;19000&quot;</span><br></pre></td></tr></table></figure>
+
+<p>结果：<br> TCP    0.0.0.0:19000          0.0.0.0:0              LISTENING       2888<br> TCP    [::]:19000             [::]:0                 LISTENING       2888<br> TCP    [::1]:19000            [::1]:58746            TIME_WAIT       0<br> TCP    [::1]:19000            [::1]:58833            TIME_WAIT       0</p>
+<p>可知是由进程号为 2888 的进程占用了 19000 的端口；</p>
+<p>3.<br>根据进程号查看进程：<br>tasklist | findstr “2888”</p>
+<p>结果：<br>Apache.exe                    2888 Services                   0     21,780 K<br>可知此进程是 Apache.exe</p>
+<p>4.<br>杀死进程：<br>可以通过任务管理器 杀进程；<br>也可用代码：<br>taskkill /pid 1688 /F<br>结果：<br>成功: 已终止 PID 为 2888 的进程。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/14/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8hexo-GitHub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -431,7 +582,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
